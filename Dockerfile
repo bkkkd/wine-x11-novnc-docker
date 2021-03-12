@@ -7,7 +7,8 @@ ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US.UTF-8
 
 RUN dpkg --add-architecture i386 && \
-    apt-get update && apt-get -y install python2 python-is-python2 xvfb x11vnc xdotool wget tar supervisor net-tools fluxbox gnupg2 && \
+    apt-get update && \
+    apt-get -y install python2 python-is-python2 xvfb x11vnc xdotool wget tar supervisor net-tools fluxbox gnupg2 php7.4-bcmath php7.4-bz2 php7.4-cli php7.4-common php7.4-curl php7.4-fpm php7.4-gd php7.4-mbstring php7.4-mysql  php7.4-sqlite3 php7.4-zip php7.4-xml php7.4-opcache nginx && \
     wget -O - https://dl.winehq.org/wine-builds/winehq.key | apt-key add -  && \
     echo 'deb https://dl.winehq.org/wine-builds/ubuntu/ focal main' |tee /etc/apt/sources.list.d/winehq.list && \
     apt-get update && apt-get -y install winehq-stable  && \
