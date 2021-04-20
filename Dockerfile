@@ -8,7 +8,7 @@ ENV LANGUAGE en_US.UTF-8
 
 RUN dpkg --add-architecture i386 && \
     apt-get update && \
-    apt-get -y install python2 python-is-python2 xvfb x11vnc xdotool wget tar supervisor net-tools fluxbox gnupg2 php7.4-bcmath php7.4-bz2 php7.4-cli php7.4-common php7.4-curl php7.4-fpm php7.4-gd php7.4-mbstring php7.4-mysql  php7.4-sqlite3 php7.4-zip php7.4-xml php7.4-opcache nginx && \
+    apt-get -y install python2 python-is-python2 xvfb x11vnc xdotool wget tar supervisor net-tools fluxbox gnupg2 php7.4-bcmath php7.4-bz2 php7.4-cli php7.4-common php7.4-curl php7.4-fpm php7.4-gd php7.4-mbstring php7.4-mysql  php7.4-sqlite3 php7.4-zip php7.4-xml php7.4-opcache nginx libopencv-dev libopencv-dev libopencv-dev python3-opencv  php-dev cmake  pkg-config  zip && \
     php -r "copy('https://install.phpcomposer.com/installer', 'composer-setup.php');" && \
     php composer-setup.php && \
     php -r "unlink('composer-setup.php');" && \
@@ -20,6 +20,7 @@ RUN dpkg --add-architecture i386 && \
     mkdir /opt/wine-stable/share/wine/gecko && wget -O /opt/wine-stable/share/wine/gecko/wine-gecko-2.47.1-x86.msi https://dl.winehq.org/wine/wine-gecko/2.47.1/wine-gecko-2.47.1-x86.msi && wget -O /opt/wine-stable/share/wine/gecko/wine-gecko-2.47.1-x86_64.msi https://dl.winehq.org/wine/wine-gecko/2.47.1/wine-gecko-2.47.1-x86_64.msi && \
     apt-get -y full-upgrade && apt-get clean && rm -rf /var/lib/apt/lists/*
 ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+RUN echo "extension=opencv.so" > /etc/php/7.4/mods-available/opencv.ini &&  /usr/bin/ln -sf /etc/php/7.4/mods-available/opencv.ini /etc/php/7.4/cli/conf.d/20-opencv.ini && /usr/bin/ln -sf /etc/php/7.4/mods-available/opencv.ini /etc/php/7.4/fpm/conf.d/20-opencv.ini
 
 ENV WINEPREFIX /root/prefix32
 ENV WINEARCH win32
